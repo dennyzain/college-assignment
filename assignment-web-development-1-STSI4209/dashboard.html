@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SITTA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SITTA</h2>
+                <p>Universitas Terbuka</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <span class="icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="stok.html" class="nav-item">
+                    <span class="icon">📚</span>
+                    <span>Informasi Bahan Ajar</span>
+                </a>
+                <a href="tracking.html" class="nav-item">
+                    <span class="icon">📦</span>
+                    <span>Tracking Pengiriman</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📊</span>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item submenu">
+                    <span class="icon">└</span>
+                    <span>Monitoring Progress DO</span>
+                </a>
+                <a href="#" class="nav-item submenu">
+                    <span class="icon">└</span>
+                    <span>Rekap Bahan Ajar</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📜</span>
+                    <span>Histori Transaksi</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="greeting" id="greeting"></div>
+                <div class="user-info" id="userInfo"></div>
+            </header>
+
+            <div class="content">
+                <h1>Dashboard</h1>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📚</div>
+                        <div class="stat-info">
+                            <h3>Total Bahan Ajar</h3>
+                            <p class="stat-number" id="totalBahanAjar">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">📦</div>
+                        <div class="stat-info">
+                            <h3>Dalam Pengiriman</h3>
+                            <p class="stat-number">1</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-info">
+                            <h3>Terkirim</h3>
+                            <p class="stat-number">1</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <h3>Total Stok</h3>
+                            <p class="stat-number" id="totalStok">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-access">
+                    <h2>Akses Cepat</h2>
+                    <div class="quick-menu">
+                        <a href="stok.html" class="quick-card">
+                            <div class="quick-icon">📚</div>
+                            <h3>Informasi Bahan Ajar</h3>
+                            <p>Lihat dan kelola stok bahan ajar</p>
+                        </a>
+                        
+                        <a href="tracking.html" class="quick-card">
+                            <div class="quick-icon">📦</div>
+                            <h3>Tracking Pengiriman</h3>
+                            <p>Lacak status pengiriman bahan ajar</p>
+                        </a>
+                        
+                        <a href="#" class="quick-card">
+                            <div class="quick-icon">📊</div>
+                            <h3>Laporan</h3>
+                            <p>Monitoring dan rekap data</p>
+                        </a>
+                        
+                        <a href="#" class="quick-card">
+                            <div class="quick-icon">📜</div>
+                            <h3>Histori Transaksi</h3>
+                            <p>Riwayat transaksi bahan ajar</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/Data.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

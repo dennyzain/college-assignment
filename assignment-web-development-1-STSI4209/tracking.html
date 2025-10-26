@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Pengiriman - SITTA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SITTA</h2>
+                <p>Universitas Terbuka</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="stok.html" class="nav-item">
+                    <span class="icon">📚</span>
+                    <span>Informasi Bahan Ajar</span>
+                </a>
+                <a href="tracking.html" class="nav-item active">
+                    <span class="icon">📦</span>
+                    <span>Tracking Pengiriman</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📊</span>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item submenu">
+                    <span class="icon">└</span>
+                    <span>Monitoring Progress DO</span>
+                </a>
+                <a href="#" class="nav-item submenu">
+                    <span class="icon">└</span>
+                    <span>Rekap Bahan Ajar</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📜</span>
+                    <span>Histori Transaksi</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Tracking Pengiriman</h2>
+                <div class="user-info" id="userInfo"></div>
+            </header>
+
+            <div class="content">
+                <div class="tracking-search">
+                    <h2>Lacak Pengiriman Bahan Ajar</h2>
+                    <div class="search-box">
+                        <input type="text" id="nomorDO" placeholder="Masukkan Nomor Delivery Order (DO)" />
+                        <button class="btn-primary" onclick="cariPengiriman()">Cari</button>
+                    </div>
+                </div>
+
+                <div id="trackingResult" class="tracking-result" style="display: none;">
+                    <div class="result-header">
+                        <h3>Informasi Pengiriman</h3>
+                    </div>
+                    
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Nomor DO:</label>
+                            <span id="resultNomorDO"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>Nama Penerima:</label>
+                            <span id="resultNama"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>Ekspedisi:</label>
+                            <span id="resultEkspedisi"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>Tanggal Kirim:</label>
+                            <span id="resultTanggal"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>Paket:</label>
+                            <span id="resultPaket"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>Total Pembayaran:</label>
+                            <span id="resultTotal"></span>
+                        </div>
+                    </div>
+
+                    <div class="status-section">
+                        <h3>Status Pengiriman</h3>
+                        <div class="status-badge" id="statusBadge"></div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-section">
+                        <h3>Riwayat Perjalanan</h3>
+                        <div class="timeline" id="timeline"></div>
+                    </div>
+                </div>
+
+                <div id="notFound" class="not-found" style="display: none;">
+                    <div class="not-found-icon">🔍</div>
+                    <h3>Data Tidak Ditemukan</h3>
+                    <p>Nomor Delivery Order yang Anda masukkan tidak ditemukan dalam sistem.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/Data.js"></script>
+    <script src="js/tracking.js"></script>
+</body>
+</html>

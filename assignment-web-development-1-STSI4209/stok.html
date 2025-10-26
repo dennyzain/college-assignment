@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stok Bahan Ajar - SITTA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>SITTA</h2>
+                <p>Universitas Terbuka</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <span class="icon">🏠</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="stok.html" class="nav-item active">
+                    <span class="icon">📚</span>
+                    <span>Informasi Bahan Ajar</span>
+                </a>
+                <a href="tracking.html" class="nav-item">
+                    <span class="icon">📦</span>
+                    <span>Tracking Pengiriman</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📊</span>
+                    <span>Laporan</span>
+                </a>
+                <a href="#" class="nav-item submenu">
+                    <span class="icon">└</span>
+                    <span>Monitoring Progress DO</span>
+                </a>
+                <a href="#" class="nav-item submenu">
+                    <span class="icon">└</span>
+                    <span>Rekap Bahan Ajar</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <span class="icon">📜</span>
+                    <span>Histori Transaksi</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Informasi Stok Bahan Ajar</h2>
+                <div class="user-info" id="userInfo"></div>
+            </header>
+
+            <div class="content">
+                <div class="table-actions">
+                    <button class="btn-primary" onclick="tampilkanFormTambah()">+ Tambah Bahan Ajar</button>
+                </div>
+
+                <div id="formTambah" class="form-container" style="display: none;">
+                    <h3>Tambah Bahan Ajar Baru</h3>
+                    <form id="formBahanAjar">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kodeLokasi">Kode Lokasi</label>
+                                <input type="text" id="kodeLokasi" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="kodeBarang">Kode Barang</label>
+                                <input type="text" id="kodeBarang" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="namaBarang">Nama Barang</label>
+                            <input type="text" id="namaBarang" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="jenisBarang">Jenis Barang</label>
+                                <select id="jenisBarang" required>
+                                    <option value="BMP">BMP</option>
+                                    <option value="Modul">Modul</option>
+                                    <option value="Buku">Buku</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edisi">Edisi</label>
+                                <input type="number" id="edisi" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="stok">Stok</label>
+                                <input type="number" id="stok" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Simpan</button>
+                            <button type="button" class="btn-secondary" onclick="batalTambah()">Batal</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Cover</th>
+                                <th>Kode Lokasi</th>
+                                <th>Kode Barang</th>
+                                <th>Nama Barang</th>
+                                <th>Jenis</th>
+                                <th>Edisi</th>
+                                <th>Stok</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBahanAjar">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-info">
+                    <p>Total Bahan Ajar: <strong id="totalData">0</strong></p>
+                    <p>Total Stok: <strong id="totalStok">0</strong></p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/Data.js"></script>
+    <script src="js/stok.js"></script>
+</body>
+</html>

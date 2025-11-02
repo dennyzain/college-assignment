@@ -1,0 +1,44 @@
+ALGORITMA Hitung_Gaji_Karyawan
+
+DEKLARASI
+    Golongan : string
+    JamLembur : integer
+    GajiPokok, GajiLembur, TotalGaji, Persentase : real
+
+DESKRIPSI
+    // Input data karyawan
+    OUTPUT "Masukkan Golongan Karyawan (A/B/C): "
+    INPUT Golongan
+    OUTPUT "Masukkan Jumlah Jam Lembur: "
+    INPUT JamLembur
+
+    // Tentukan gaji pokok berdasarkan golongan
+    IF Golongan = 'A' THEN
+        GajiPokok ← 5000000
+    ELSE IF Golongan = 'B' THEN
+        GajiPokok ← 6500000
+    ELSE
+        GajiPokok ← 9500000
+    ENDIF
+
+    // Tentukan persentase lembur berdasarkan jam lembur
+    IF JamLembur = 1 THEN
+        Persentase ← 30
+    ELSE IF JamLembur = 2 THEN
+        Persentase ← 32
+    ELSE IF JamLembur = 3 THEN
+        Persentase ← 34
+    ELSE IF JamLembur = 4 THEN
+        Persentase ← 36
+    ELSE
+        Persentase ← 38
+    ENDIF
+
+    // Hitung gaji lembur dan total gaji
+    GajiLembur ← GajiPokok * (Persentase / 100)
+    TotalGaji ← GajiPokok + GajiLembur
+
+    // Tampilkan hasil
+    OUTPUT "Total Penghasilan Karyawan: Rp ", TotalGaji
+
+SELESAI

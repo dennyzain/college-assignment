@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITTA Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app" class="dashboard-layout" v-cloak>
+        <app-sidebar
+            :active="activePage"
+            @logout="handleLogout">
+        </app-sidebar>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="greeting">{{ greetingMessage }}</div>
+                <user-info :user="currentUser"></user-info>
+            </header>
+
+            <div class="content">
+                <h1>Dashboard</h1>
+
+                <stats-grid :cards="statCards"></stats-grid>
+
+                <section class="quick-access">
+                    <h2>Akses Cepat</h2>
+                    <quick-access :items="quickAccessItems"></quick-access>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="js/data-source.js"></script>
+    <script src="js/components/layout.js"></script>
+    <script src="js/index-app.js"></script>
+</body>
+</html>

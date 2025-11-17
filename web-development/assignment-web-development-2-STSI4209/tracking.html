@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Pengiriman - SITTA</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="trackingApp" class="dashboard-layout" v-cloak>
+        <app-sidebar
+            :active="activePage"
+            @logout="handleLogout">
+        </app-sidebar>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h2>Tracking Pengiriman</h2>
+                <user-info :user="currentUser"></user-info>
+            </header>
+
+            <div class="content">
+                <section class="tracking-search">
+                    <h2>Lacak Pengiriman Bahan Ajar</h2>
+                    <p class="search-hint">
+                        Masukkan nomor Delivery Order (DO) untuk melihat status terbaru pengiriman.
+                    </p>
+                    <div class="search-box">
+                        <input
+                            type="text"
+                            placeholder="Masukkan Nomor Delivery Order (DO)"
+                            v-model="nomorDO"
+                            @keyup.enter="searchTracking"
+                            aria-label="Nomor Delivery Order">
+                        <button
+                            type="button"
+                            class="btn-primary"
+                            @click="searchTracking"
+                            :disabled="loading">
+                            {{ loading ? 'Mencari...' : 'Cari' }}
+                        </button>
+                        <button
+                            v-if="nomorDO"
+                            type="button"
+                            class="btn-secondary"
+                            @click="clearSearch">
+                            Reset
+                        </button>
+                    </div>
+                    <p v-if="validationError" class="error-text">
+                        {{ validationError }}
+                    </p>
+
+                    <div
+                        v-if="recentHistory.length"
+                        class="search-history"
+                        aria-label="Riwayat pencarian">
+                        <span>Riwayat:</span>
+                        <button
+                            v-for="item in recentHistory"
+                            :key="item"
+                            type="button"
+                            class="history-chip"
+                            @click="selectHistory(item)">
+                            {{ item }}
+                        </button>
+                    </div>
+                </section>
+
+                <transition name="fade">
+                    <section
+                        v-if="hasResult"
+                        class="tracking-result">
+                        <div class="result-header">
+                            <h3>Informasi Pengiriman</h3>
+                            <span :class="statusBadgeClass">{{ statusMeta.label }}</span>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Nomor DO:</label>
+                                <span>{{ trackingResult.nomorDO }}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Nama Penerima:</label>
+                                <span>{{ trackingResult.nama }}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Ekspedisi:</label>
+                                <span>{{ trackingResult.ekspedisi }}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Tanggal Kirim:</label>
+                                <span>{{ formatDate(trackingResult.tanggalKirim) }}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Paket:</label>
+                                <span>{{ trackingResult.paket }}</span>
+                            </div>
+                            <div class="info-item">
+                                <label>Total Pembayaran:</label>
+                                <span>{{ trackingResult.total }}</span>
+                            </div>
+                        </div>
+
+                        <div class="status-section">
+                            <h3>Status Pengiriman</h3>
+                            <div class="progress-bar">
+                                <div
+                                    class="progress-fill"
+                                    :style="{ width: progressWidth }">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-section">
+                            <h3>Riwayat Perjalanan</h3>
+                            <div class="timeline" v-if="timelineItems.length">
+                                <div
+                                    v-for="(item, index) in timelineItems"
+                                    :key="item.waktu + index"
+                                    class="timeline-item"
+                                    :class="{ active: index === 0 }">
+                                    <div class="timeline-marker"></div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-time">
+                                            {{ formatTimelineTime(item.waktu) }}
+                                        </div>
+                                        <div class="timeline-desc">
+                                            {{ item.keterangan }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <empty-state
+                                v-else
+                                icon="🛤️"
+                                title="Belum ada riwayat"
+                                description="Timeline pengiriman akan muncul setelah data tersedia.">
+                            </empty-state>
+                        </div>
+                    </section>
+                </transition>
+
+                <transition name="fade">
+                    <section
+                        v-if="notFound && !loading"
+                        class="not-found">
+                        <div class="not-found-icon">🔍</div>
+                        <h3>Data Tidak Ditemukan</h3>
+                        <p>
+                            Nomor Delivery Order yang Anda masukkan tidak ditemukan dalam sistem.
+                            Periksa kembali nomor yang dimasukkan atau hubungi admin.
+                        </p>
+                        <ul class="helper-list">
+                            <li>Pastikan nomor DO terdiri dari angka saja.</li>
+                            <li>Coba masukkan nomor lain dari riwayat pencarian.</li>
+                        </ul>
+                    </section>
+                </transition>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="js/data-source.js"></script>
+    <script src="js/components/layout.js"></script>
+    <script src="js/tracking-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+services:
+  # Database untuk Praktikum Transaksi
+  mysql-main:
+    image: mysql:8.0
+    container_name: mysql-main
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - db-network
+
+  # Database Node 1 (Jakarta)
+  mysql-node1:
+    image: mysql:8.0
+    container_name: mysql-node1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - db-network
+
+  # Database Node 2 (Surabaya)
+  mysql-node2:
+    image: mysql:8.0
+    container_name: mysql-node2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3308:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - db-network
+
+networks:
+  db-network:
+    driver: bridge
